@@ -77,8 +77,8 @@ namespace DatabaseFirst
             {
                 using (var db = new AcademyGroupContext())
                 {
-                    List<AcademyGroup> list = comboBoxGroup.DataSource as List<AcademyGroup>;
-                    string academygroup = list[comboBoxGroup.SelectedIndex].Name;
+                    List<AcademyGroup>? list = comboBoxGroup.DataSource as List<AcademyGroup>;
+                    string academygroup = list[comboBoxGroup.SelectedIndex].Name!;
                     var query = from b in db.AcademyGroups
                                 where b.Name == academygroup
                                 select b;
@@ -125,8 +125,8 @@ namespace DatabaseFirst
                 }
                 using (var db = new AcademyGroupContext())
                 {
-                    List<AcademyGroup> list = comboBoxGroup.DataSource as List<AcademyGroup>;
-                    string academygroup = list[comboBoxGroup.SelectedIndex].Name;
+                    List<AcademyGroup>? list = comboBoxGroup.DataSource as List<AcademyGroup>;
+                    string academygroup = list[comboBoxGroup.SelectedIndex].Name!;
                     var query = (from b in db.AcademyGroups
                                  where b.Name == academygroup
                                  select b).Single();
@@ -174,8 +174,8 @@ namespace DatabaseFirst
 
                 using (var db = new AcademyGroupContext())
                 {
-                    List<AcademyGroup> list = comboBoxGroup.DataSource as List<AcademyGroup>;
-                    string academygroup = list[comboBoxGroup.SelectedIndex].Name;
+                    List<AcademyGroup>? list = comboBoxGroup.DataSource as List<AcademyGroup>;
+                    string academygroup = list[comboBoxGroup.SelectedIndex].Name!;
                     var query = (from b in db.AcademyGroups
                                  where b.Name == academygroup
                                  select b).Single();
@@ -213,8 +213,8 @@ namespace DatabaseFirst
             {
                 using (var db = new AcademyGroupContext())
                 {
-                    List<Student> list = comboBoxStudent.DataSource as List<Student>;
-                    string student = list[comboBoxStudent.SelectedIndex].LastName;
+                    List<Student>? list = comboBoxStudent.DataSource as List<Student>;
+                    string student = list[comboBoxStudent.SelectedIndex].LastName!;
                     var query = from b in db.Students
                                 where b.LastName == student
                                 select b;
@@ -266,16 +266,16 @@ namespace DatabaseFirst
 
                 using (var db = new AcademyGroupContext())
                 {
-                    List<AcademyGroup> list = comboBoxGroup.DataSource as List<AcademyGroup>;
-                    string academygroup = list[comboBoxGroup.SelectedIndex].Name;
+                    List<AcademyGroup>? list = comboBoxGroup.DataSource as List<AcademyGroup>;
+                    string academygroup = list[comboBoxGroup.SelectedIndex].Name!;
                     var query = (from b in db.AcademyGroups
                                  where b.Name == academygroup
                                  select b).Single();
                     if (query == null)
                         return;
 
-                    List<Student> studentlist = comboBoxStudent.DataSource as List<Student>;
-                    string student = studentlist[comboBoxStudent.SelectedIndex].LastName;
+                    List<Student>? studentlist = comboBoxStudent.DataSource as List<Student>;
+                    string student = studentlist[comboBoxStudent.SelectedIndex].LastName!;
                     var query2 = (from b in db.Students
                                   where b.LastName == student
                                   select b).Single();
@@ -309,10 +309,10 @@ namespace DatabaseFirst
             {
                 using (var db = new AcademyGroupContext())
                 {
-                    List<Student> studentlist = comboBoxStudent.DataSource as List<Student>;
+                    List<Student>? studentlist = comboBoxStudent.DataSource as List<Student>;
                     if (studentlist == null)
                         return;
-                    string student = studentlist[comboBoxStudent.SelectedIndex].LastName;
+                    string student = studentlist[comboBoxStudent.SelectedIndex].LastName!;
                     var query = (from b in db.Students.Include(s => s.AcademyGroup)
                                  where b.LastName == student
                                  select b).Single();
@@ -321,7 +321,7 @@ namespace DatabaseFirst
                     textBoxLastName.Text = query.LastName;
                     textBoxAverage.Text = query.PointAverage.ToString();
                     textBoxAge.Text = query.Age.ToString();
-                    textBoxGr.Text = query.AcademyGroup.Name;
+                    textBoxGr.Text = query.AcademyGroup?.Name;
                 }
             }
             catch (Exception ex)
@@ -338,8 +338,8 @@ namespace DatabaseFirst
             {
                 using (var db = new AcademyGroupContext())
                 {
-                    List<AcademyGroup> list = comboBoxGroup.DataSource as List<AcademyGroup>;
-                    string academygroup = list[comboBoxGroup.SelectedIndex].Name;
+                    List<AcademyGroup>? list = comboBoxGroup.DataSource as List<AcademyGroup>;
+                    string academygroup = list[comboBoxGroup.SelectedIndex].Name!;
                     var query = (from b in db.AcademyGroups.Include(gr => gr.Students)
                                  where b.Name == academygroup
                                  select b).Single();
